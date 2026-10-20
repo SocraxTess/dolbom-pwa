@@ -28,6 +28,10 @@
 const log = m => { document.getElementById('log').textContent += new Date().toLocaleTimeString() + '  ' + m + '\n'; };
 document.getElementById('ua').textContent = navigator.userAgent;
 function summary() {
+  try { summaryInner(); } catch (e) { document.getElementById('summary').innerHTML = '<div class="row no">음성 기능 오류: ' + e.message + '</div>'; }
+  if (/KAKAOTALK|; wv\)/i.test(navigator.userAgent)) document.getElementById('summary').innerHTML += '<div class="row no">앱 속 브라우저(카카오톡 등)로 열려 있습니다. Chrome에서 다시 열어 주세요.</div>';
+}
+function summaryInner() {
   if (!('speechSynthesis' in window)) { document.getElementById('summary').innerHTML = '<div class="row no">이 브라우저는 음성 기능이 없습니다</div>'; return; }
   const vs = speechSynthesis.getVoices();
   const has = p => vs.filter(v => (v.lang || '').replace('_', '-').toLowerCase().startsWith(p));

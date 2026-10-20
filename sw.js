@@ -1,6 +1,6 @@
 // 오프라인 캐시: 한 번 열면 화면·그림·문장 데이터는 인터넷 없이도 열림.
 // (기기 TTS 음성은 기기에 설치된 음성에 따라 오프라인 가능 여부가 다름 — 사전 녹음 파일은 audio/ 에 넣으면 함께 캐시)
-const CACHE = 'dolbom-v0.1.1';
+const CACHE = 'dolbom-v0.1.2';
 const CORE = ['./', 'index.html', 'app.js', 'icons.js', 'data/phrases.json', 'manifest.webmanifest', 'icons/app.svg', 'icons/app-192.png', 'icons/app-512.png'];
 
 self.addEventListener('install', e => {

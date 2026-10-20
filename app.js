@@ -228,8 +228,29 @@
     if (d.act === 'roles') { state.role = null; store.set('role', ''); state.history = []; state.screen = 'home'; return render(); }
   });
 
+  // ── 앱 속 브라우저(카카오톡·네이버·인스타 등)는 음성 읽기를 지원하지 않음 → 외부 브라우저로 ──
+  const UA = navigator.userAgent || '';
+  const IN_APP = /KAKAOTALK|NAVER\(inapp|Instagram|FBAN|FBAV|Line\/|DaumApps|everytimeApp|; wv\)/i.test(UA);
+  function openExternal() {
+    const url = location.href;
+    if (/KAKAOTALK/i.test(UA)) { location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(url); return; }
+    if (/Android/i.test(UA)) { location.href = 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end'; return; }
+  }
+  function inAppBanner() {
+    if (!IN_APP) return;
+    const bar = document.createElement('div');
+    bar.className = 'inapp';
+    bar.innerHTML = `<b>이 화면에서는 음성이 나오지 않아요.</b><span>Chrome 등 인터넷 앱에서 열어야 소리가 납니다.</span>
+      <button type="button" id="openExt">인터넷 앱으로 열기</button>
+      <small>안 열리면 오른쪽 위 ⋮ 메뉴에서 '다른 브라우저로 열기'를 누르세요. 주소: <span class="u">${esc(location.origin + location.pathname)}</span></small>`;
+    document.body.prepend(bar);
+    document.getElementById('openExt').addEventListener('click', openExternal);
+    if (/KAKAOTALK/i.test(UA)) { try { sessionStorage.getItem('dolbom.ext') || (sessionStorage.setItem('dolbom.ext', '1'), openExternal()); } catch { openExternal(); } }
+  }
+
   // ── 시작: QR 주소로 역할·언어 바로 지정 가능 (?role=patient&lang=ru) ──
   async function boot() {
+    inAppBanner();
     try {
       const res = await fetch('data/phrases.json', { cache: 'no-cache' });
       DATA = await res.json();
