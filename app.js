@@ -41,22 +41,33 @@
     }
     ttsSpeak(text, code, onStatus);
   }
+  // 안드로이드 Chrome 대응: cancel() 직후 바로 speak()하면 소리 없이 무시되는 문제가 있어
+  // 말하는 중일 때만 cancel하고 잠깐 쉬었다가 말한다. 2.5초 안에 시작 안 하면 '음성 없음'으로 본다.
+  let watchdog = null;
   function ttsSpeak(text, code, onStatus) {
-    if (!('speechSynthesis' in window)) return onStatus('none');
+    if (!('speechSynthesis' in window)) return onStatus('none', code);
+    const synth = window.speechSynthesis;
+    loadVoices();
     const tag = langTag(code);
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = tag; u.rate = 0.85; u.volume = 1;
     const base = tag.split('-')[0];
-    const v = voices.find(x => x.lang && x.lang.replace('_', '-').toLowerCase() === tag.toLowerCase())
-           || voices.find(x => x.lang && x.lang.toLowerCase().startsWith(base));
+    const norm = s => (s || '').replace('_', '-').toLowerCase();
+    const v = voices.find(x => norm(x.lang) === tag.toLowerCase()) || voices.find(x => norm(x.lang).startsWith(base));
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = v ? v.lang.replace('_', '-') : tag; u.rate = 0.85; u.volume = 1;
     if (v) u.voice = v;
-    u.onerror = () => onStatus('none');
-    u.onstart = () => onStatus('ok');
-    try { speechSynthesis.speak(u); } catch { return onStatus('none'); }
-    if (voices.length && !hasVoice(tag)) onStatus('none');
+    let started = false;
+    u.onstart = () => { started = true; clearTimeout(watchdog); onStatus('ok', code); };
+    u.onerror = e => { if (e && (e.error === 'interrupted' || e.error === 'canceled')) return; clearTimeout(watchdog); onStatus('none', code); };
+    const go = () => {
+      try { synth.resume(); synth.speak(u); } catch { return onStatus('none', code); }
+      clearTimeout(watchdog);
+      watchdog = setTimeout(() => { if (!started) onStatus(voices.length && !hasVoice(tag) ? 'missing' : 'none', code); }, 2500);
+    };
+    if (synth.speaking || synth.pending) { synth.cancel(); setTimeout(go, 150); } else go();
   }
   function stopSpeaking() {
-    try { speechSynthesis.cancel(); } catch {}
+    clearTimeout(watchdog);
+    try { if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); } catch {}
     if (currentAudio) { currentAudio.pause(); currentAudio = null; }
   }
 
@@ -191,13 +202,15 @@
     if (s === 'say') {
       const p = DATA.phrases.find(x => x.id === state.phrase);
       const code = p.to === 'caregiver' ? state.lang : 'ko';
-      setTimeout(() => speak(p, code, voiceStatus), 150);
+      speak(p, code, voiceStatus); // 터치 직후 바로 재생해야 휴대폰 브라우저가 막지 않음
     }
   }
-  function voiceStatus(st) {
+  function voiceStatus(st, code) {
     const el = document.getElementById('vs');
     if (!el) return;
-    el.textContent = st === 'none' ? '이 기기에서 음성이 나오지 않아요. 화면 글자를 보여 주세요.' : '';
+    const name = code === 'ko' ? '한국어' : (DATA.languages.find(l => l.code === code) || {}).ko || '';
+    el.textContent = st === 'missing' ? `이 휴대폰에 ${name} 음성이 설치되어 있지 않아요. 화면 글자를 보여 주세요.`
+                   : st === 'none' ? `${name} 음성이 나오지 않았어요. 화면 글자를 보여 주세요.` : '';
   }
 
   // ── 이벤트 ─────────────────────────────────────────────────────────

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>음성 점검 · 돌봄도 통역 됩니다</title>
+<style>
+  body { font-family: system-ui, "Noto Sans KR", sans-serif; margin: 0; padding: 16px; background: #f7f3ec; color: #1b2328; font-size: 18px; }
+  h1 { font-size: 24px; margin: 4px 0 12px; color: #1f4e5a; }
+  button { font: inherit; font-weight: 700; width: 100%; min-height: 64px; margin: 6px 0; border-radius: 14px; border: 3px solid #1f4e5a; background: #fff; }
+  .row { padding: 10px 12px; margin: 6px 0; border-radius: 12px; background: #fff; }
+  .ok { color: #1b7a3d; font-weight: 800; } .no { color: #b3261e; font-weight: 800; }
+  #log { font-family: ui-monospace, monospace; font-size: 14px; white-space: pre-wrap; background: #fff; padding: 10px; border-radius: 12px; }
+  small { color: #55616a; }
+</style>
+</head>
+<body>
+<h1>음성 점검</h1>
+<p><small>버튼을 하나씩 눌러 소리가 나는지 확인하고, 이 화면 전체를 캡처해 보내 주세요.</small></p>
+<div id="summary"></div>
+<button data-lang="ko-KR" data-text="물 마시고 싶어요">한국어 듣기</button>
+<button data-lang="zh-CN" data-text="我想喝水。">중국어 듣기 · 我想喝水</button>
+<button data-lang="ru-RU" data-text="Я хочу пить.">러시아어 듣기 · Я хочу пить</button>
+<p><small>기록</small></p>
+<div id="log"></div>
+<p><small id="ua"></small></p>
+<script>
+const log = m => { document.getElementById('log').textContent += new Date().toLocaleTimeString() + '  ' + m + '\n'; };
+document.getElementById('ua').textContent = navigator.userAgent;
+function summary() {
+  if (!('speechSynthesis' in window)) { document.getElementById('summary').innerHTML = '<div class="row no">이 브라우저는 음성 기능이 없습니다</div>'; return; }
+  const vs = speechSynthesis.getVoices();
+  const has = p => vs.filter(v => (v.lang || '').replace('_', '-').toLowerCase().startsWith(p));
+  const line = (name, p) => { const l = has(p); return `<div class="row">${name}: ${l.length ? `<span class="ok">있음 ${l.length}개</span> <small>${l.slice(0,3).map(v => v.name + ' (' + v.lang + ')').join(', ')}</small>` : '<span class="no">없음</span>'}</div>`; };
+  document.getElementById('summary').innerHTML = `<div class="row">전체 음성 수: <b>${vs.length}</b></div>` + line('한국어', 'ko') + line('중국어', 'zh') + line('러시아어', 'ru');
+}
+if ('speechSynthesis' in window) { summary(); speechSynthesis.onvoiceschanged = () => { summary(); log('음성 목록 갱신'); }; setTimeout(summary, 1000); }
+document.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+  const s = window.speechSynthesis; if (!s) return;
+  const vs = s.getVoices(); const lang = b.dataset.lang; const p = lang.split('-')[0];
+  const v = vs.find(x => (x.lang || '').replace('_','-') === lang) || vs.find(x => (x.lang || '').toLowerCase().startsWith(p));
+  const u = new SpeechSynthesisUtterance(b.dataset.text); u.lang = v ? v.lang.replace('_','-') : lang; if (v) u.voice = v; u.rate = 0.85;
+  u.onstart = () => log(lang + ' 시작 ✔'); u.onend = () => log(lang + ' 끝');
+  u.onerror = e => log(lang + ' 오류: ' + e.error);
+  log(lang + ' 요청 (음성: ' + (v ? v.name : '지정 안 됨') + ')');
+  if (s.speaking || s.pending) s.cancel();
+  setTimeout(() => { s.resume(); s.speak(u); }, s.speaking ? 150 : 0);
+}));
+</script>
+</body>
+</html>
