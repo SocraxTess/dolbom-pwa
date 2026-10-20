@@ -1,0 +1,72 @@
+{
+  "version": "0.1.0-test",
+  "notice": "모든 번역·음성은 시험용입니다. 모국어 화자 검수 전에는 실제 돌봄에 단독으로 사용하지 마세요.",
+  "languages": [
+    { "code": "zh", "label": "中文", "ko": "중국어", "tts": "zh-CN", "enabled": true },
+    { "code": "ru", "label": "Русский", "ko": "러시아어", "tts": "ru-RU", "enabled": true },
+    { "code": "uz", "label": "O'zbekcha", "ko": "우즈베크어", "tts": "uz-UZ", "enabled": false }
+  ],
+  "ui": {
+    "zh": { "caregiver": "护工", "toPatient": "回答病人", "toNurse": "告诉护士", "replay": "再听一次", "back": "返回", "home": "首页", "testOnly": "试用版翻译，未经审核" },
+    "ru": { "caregiver": "Сиделка", "toPatient": "Ответить пациенту", "toNurse": "Сказать медсестре", "replay": "Ещё раз", "back": "Назад", "home": "В начало", "testOnly": "Тестовый перевод, не проверен" }
+  },
+  "categories": [
+    { "id": "drink-food", "role": "patient", "icon": "cup", "ko": "물 · 식사" },
+    { "id": "toilet", "role": "patient", "icon": "diaper", "ko": "기저귀 · 화장실" },
+    { "id": "position", "role": "patient", "icon": "bed", "ko": "자세 바꾸기" },
+    { "id": "move", "role": "patient", "icon": "wheelchair", "ko": "앉기 · 이동" },
+    { "id": "discomfort", "role": "patient", "icon": "thermo", "ko": "아파요 · 불편해요" },
+    { "id": "help", "role": "patient", "icon": "bell", "ko": "도와주세요", "safety": "urgent" },
+
+    { "id": "reply", "role": "caregiver", "icon": "reply", "ko": "환자에게 답하기" },
+    { "id": "report", "role": "caregiver", "icon": "nurse", "ko": "간호사에게 말하기" },
+
+    { "id": "care", "role": "nurse", "icon": "bed", "ko": "돌봄 요청" },
+    { "id": "check", "role": "nurse", "icon": "check", "ko": "확인 · 안전" },
+    { "id": "answer", "role": "nurse", "icon": "reply", "ko": "대답" }
+  ],
+  "phrases": [
+    { "id": "p01", "role": "patient", "to": "caregiver", "category": "drink-food", "icon": "cup", "ko": "물 마시고 싶어요", "tr": { "zh": "我想喝水。", "ru": "Я хочу пить." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "p02", "role": "patient", "to": "caregiver", "category": "drink-food", "icon": "bowl", "ko": "배고파요", "tr": { "zh": "我饿了。", "ru": "Я хочу есть." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "p03", "role": "patient", "to": "caregiver", "category": "drink-food", "icon": "stop", "ko": "그만 먹을래요", "tr": { "zh": "我不想吃了。", "ru": "Я больше не хочу есть." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "p04", "role": "patient", "to": "caregiver", "category": "toilet", "icon": "diaper", "ko": "기저귀를 갈아 주세요", "tr": { "zh": "请帮我换尿布。", "ru": "Пожалуйста, поменяйте мне подгузник." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "p05", "role": "patient", "to": "caregiver", "category": "toilet", "icon": "toilet", "ko": "화장실에 가고 싶어요", "tr": { "zh": "我想上厕所。", "ru": "Я хочу в туалет." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "p06", "role": "patient", "to": "caregiver", "category": "position", "icon": "bed", "ko": "자세를 바꿔 주세요", "tr": { "zh": "请帮我换个姿势。", "ru": "Пожалуйста, помогите мне поменять положение." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "p07", "role": "patient", "to": "caregiver", "category": "position", "icon": "sit", "ko": "일어나 앉고 싶어요", "tr": { "zh": "我想坐起来。", "ru": "Я хочу сесть." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "p08", "role": "patient", "to": "caregiver", "category": "move", "icon": "wheelchair", "ko": "휠체어에 앉고 싶어요", "tr": { "zh": "我想坐轮椅。", "ru": "Я хочу сесть в коляску." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "p09", "role": "patient", "to": "caregiver", "category": "discomfort", "icon": "pain", "ko": "아파요", "tr": { "zh": "我疼。", "ru": "Мне больно." }, "audio": {}, "review": "draft", "active": true, "safety": "caution" },
+    { "id": "p10", "role": "patient", "to": "caregiver", "category": "discomfort", "icon": "cold", "ko": "추워요", "tr": { "zh": "我冷。", "ru": "Мне холодно." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "p11", "role": "patient", "to": "caregiver", "category": "discomfort", "icon": "hot", "ko": "더워요", "tr": { "zh": "我热。", "ru": "Мне жарко." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "p12", "role": "patient", "to": "caregiver", "category": "help", "icon": "bell", "ko": "간호사를 불러 주세요", "tr": { "zh": "请叫护士来。", "ru": "Пожалуйста, позовите медсестру." }, "audio": {}, "review": "draft", "active": true, "safety": "urgent" },
+
+    { "id": "c01", "role": "caregiver", "to": "patient", "category": "reply", "icon": "ok", "ko": "네, 알겠어요", "tr": { "zh": "好的，明白了。", "ru": "Да, понятно." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "c02", "role": "caregiver", "to": "patient", "category": "reply", "icon": "wait", "ko": "잠시만 기다려 주세요", "tr": { "zh": "请稍等。", "ru": "Подождите, пожалуйста." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "c03", "role": "caregiver", "to": "patient", "category": "reply", "icon": "nurse", "ko": "간호사에게 알릴게요", "tr": { "zh": "我去告诉护士。", "ru": "Я сообщу медсестре." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "c04", "role": "caregiver", "to": "patient", "category": "reply", "icon": "pain", "ko": "어디가 아프세요? 손으로 가리켜 주세요", "tr": { "zh": "哪里疼？请用手指一下。", "ru": "Где болит? Покажите рукой, пожалуйста." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "c05", "role": "caregiver", "to": "nurse", "category": "report", "icon": "bell", "ko": "간호사님, 와 주세요", "tr": { "zh": "护士，请过来一下。", "ru": "Медсестра, подойдите, пожалуйста." }, "audio": {}, "review": "draft", "active": true, "safety": "urgent" },
+    { "id": "c06", "role": "caregiver", "to": "nurse", "category": "report", "icon": "pain", "ko": "환자분이 아프다고 합니다", "tr": { "zh": "病人说疼。", "ru": "Пациент говорит, что ему больно." }, "audio": {}, "review": "draft", "active": true, "safety": "caution" },
+    { "id": "c07", "role": "caregiver", "to": "nurse", "category": "report", "icon": "hot", "ko": "환자분이 열이 있는 것 같아요", "tr": { "zh": "病人好像发烧了。", "ru": "Кажется, у пациента температура." }, "audio": {}, "review": "draft", "active": true, "safety": "caution" },
+    { "id": "c08", "role": "caregiver", "to": "nurse", "category": "report", "icon": "bowl", "ko": "환자분이 식사를 거의 못 드셨어요", "tr": { "zh": "病人几乎没吃饭。", "ru": "Пациент почти ничего не ел." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "c09", "role": "caregiver", "to": "nurse", "category": "report", "icon": "diaper", "ko": "기저귀를 갈았어요", "tr": { "zh": "尿布已经换好了。", "ru": "Подгузник поменяли." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "c10", "role": "caregiver", "to": "nurse", "category": "report", "icon": "ask", "ko": "제가 무엇을 하면 될까요?", "tr": { "zh": "我该做什么？", "ru": "Что мне нужно сделать?" }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "n01", "role": "nurse", "to": "caregiver", "category": "care", "icon": "bed", "ko": "환자 자세를 바꿔 주세요", "tr": { "zh": "请给病人换个姿势。", "ru": "Пожалуйста, поменяйте положение пациента." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "n02", "role": "nurse", "to": "caregiver", "category": "care", "icon": "cup", "ko": "환자에게 물을 드리세요", "tr": { "zh": "请给病人喝水。", "ru": "Дайте пациенту воды, пожалуйста." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "n03", "role": "nurse", "to": "caregiver", "category": "care", "icon": "diaper", "ko": "기저귀를 확인해 주세요", "tr": { "zh": "请检查一下尿布。", "ru": "Проверьте подгузник, пожалуйста." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "n04", "role": "nurse", "to": "caregiver", "category": "care", "icon": "bowl", "ko": "식사량을 알려 주세요", "tr": { "zh": "请告诉我病人吃了多少。", "ru": "Скажите, пожалуйста, сколько пациент съел." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "n05", "role": "nurse", "to": "caregiver", "category": "care", "icon": "hands", "ko": "손을 씻고 장갑을 끼세요", "tr": { "zh": "请洗手，戴上手套。", "ru": "Вымойте руки и наденьте перчатки." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "n06", "role": "nurse", "to": "caregiver", "category": "check", "icon": "bell", "ko": "환자 상태가 달라지면 바로 간호사를 불러 주세요", "tr": { "zh": "如果病人情况有变化，请马上叫护士。", "ru": "Если состояние пациента изменится, сразу позовите медсестру." }, "audio": {}, "review": "draft", "active": true, "safety": "urgent" },
+    { "id": "n07", "role": "nurse", "to": "caregiver", "category": "check", "icon": "rail", "ko": "침대 난간을 올려 주세요", "tr": { "zh": "请把床栏拉起来。", "ru": "Поднимите, пожалуйста, бортики кровати." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "n08", "role": "nurse", "to": "caregiver", "category": "check", "icon": "stop", "ko": "환자 혼자 걷지 않게 해 주세요", "tr": { "zh": "不要让病人一个人走路。", "ru": "Не давайте пациенту ходить одному." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+
+    { "id": "n09", "role": "nurse", "to": "caregiver", "category": "answer", "icon": "ok", "ko": "알겠어요, 고마워요", "tr": { "zh": "好的，谢谢。", "ru": "Хорошо, спасибо." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" },
+    { "id": "n10", "role": "nurse", "to": "caregiver", "category": "answer", "icon": "wait", "ko": "곧 갈게요", "tr": { "zh": "我马上过去。", "ru": "Сейчас подойду." }, "audio": {}, "review": "draft", "active": true, "safety": "normal" }
+  ]
+}

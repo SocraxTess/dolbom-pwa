@@ -1,0 +1,31 @@
+// 범용 픽토그램 (시험용) — 굵은 선, 단색, 64x64. 현장 이해도 테스트 후 교체 예정.
+const S = 'fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"';
+window.ICONS = {
+  cup: `<svg viewBox="0 0 64 64" ${S}><path d="M18 14h28l-4 38a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4z"/><path d="M20 28h24"/><path d="M28 38c2 3 6 3 8 0" /></svg>`,
+  bowl: `<svg viewBox="0 0 64 64" ${S}><path d="M8 32h48a24 18 0 0 1-48 0z"/><path d="M22 52h20"/><path d="M40 8l-6 22M48 10l-8 20"/></svg>`,
+  stop: `<svg viewBox="0 0 64 64" ${S}><circle cx="32" cy="32" r="22"/><path d="M17 17l30 30"/></svg>`,
+  diaper: `<svg viewBox="0 0 64 64" ${S}><path d="M8 18h48v10c0 14-10 24-24 24S8 42 8 28z"/><path d="M8 26c8 0 12 6 12 14M56 26c-8 0-12 6-12 14"/></svg>`,
+  toilet: `<svg viewBox="0 0 64 64" ${S}><path d="M20 8h14v22H20z"/><path d="M12 30h40c0 10-8 16-16 16h-6c-10 0-18-6-18-16z"/><path d="M24 46l-2 10h20l-2-10"/></svg>`,
+  bed: `<svg viewBox="0 0 64 64" ${S}><path d="M6 46V18M6 38h52v8"/><circle cx="16" cy="30" r="5"/><path d="M24 34h30"/><path d="M38 14a10 10 0 0 1 14 2l2-6M54 16h-6"/></svg>`,
+  sit: `<svg viewBox="0 0 64 64" ${S}><circle cx="30" cy="12" r="6"/><path d="M30 20v18h16v16"/><path d="M30 28h12"/><path d="M14 54h36M18 40v14"/></svg>`,
+  wheelchair: `<svg viewBox="0 0 64 64" ${S}><circle cx="26" cy="10" r="5"/><path d="M26 18v16h16l6 14"/><path d="M26 26h12"/><circle cx="28" cy="44" r="12"/></svg>`,
+  pain: `<svg viewBox="0 0 64 64" ${S}><circle cx="30" cy="34" r="20"/><path d="M22 30l4-2M38 30l-4-2"/><path d="M22 44c4-4 12-4 16 0"/><path d="M52 6l-6 10h8l-6 10"/></svg>`,
+  cold: `<svg viewBox="0 0 64 64" ${S}><path d="M32 6v52M10 19l44 26M54 19L10 45"/><path d="M26 10l6 6 6-6M26 54l6-6 6 6"/></svg>`,
+  hot: `<svg viewBox="0 0 64 64" ${S}><path d="M26 10a6 6 0 0 1 12 0v26a12 12 0 1 1-12 0z"/><circle cx="32" cy="46" r="5"/><path d="M32 22v20"/></svg>`,
+  thermo: `<svg viewBox="0 0 64 64" ${S}><circle cx="26" cy="34" r="18"/><path d="M19 30l3-2M33 30l-3-2"/><path d="M19 42c4-3 10-3 14 0"/><path d="M48 12a4 4 0 0 1 8 0v20a7 7 0 1 1-8 0z"/></svg>`,
+  bell: `<svg viewBox="0 0 64 64" ${S}><path d="M14 46h36l-4-6V28a14 14 0 0 0-28 0v12z"/><path d="M26 52a6 6 0 0 0 12 0"/><path d="M32 8v6"/><path d="M6 22c0-6 3-10 6-12M58 22c0-6-3-10-6-12"/></svg>`,
+  reply: `<svg viewBox="0 0 64 64" ${S}><path d="M8 12h40a6 6 0 0 1 6 6v18a6 6 0 0 1-6 6H28l-12 10V42H8z"/><path d="M18 24h28M18 32h18"/></svg>`,
+  nurse: `<svg viewBox="0 0 64 64" ${S}><circle cx="32" cy="22" r="10"/><path d="M14 58c0-12 8-20 18-20s18 8 18 20"/><path d="M22 10h20v-2H22z"/><path d="M32 46v8M28 50h8"/></svg>`,
+  check: `<svg viewBox="0 0 64 64" ${S}><rect x="12" y="8" width="40" height="50" rx="4"/><path d="M24 6h16v8H24z"/><path d="M22 34l7 7 13-14"/></svg>`,
+  ok: `<svg viewBox="0 0 64 64" ${S}><circle cx="32" cy="32" r="24"/><path d="M20 33l8 8 16-17"/></svg>`,
+  wait: `<svg viewBox="0 0 64 64" ${S}><circle cx="32" cy="34" r="22"/><path d="M32 20v14l9 7"/><path d="M26 6h12"/></svg>`,
+  ask: `<svg viewBox="0 0 64 64" ${S}><circle cx="32" cy="32" r="24"/><path d="M24 26a8 8 0 1 1 10 8c-2 1-2 3-2 6"/><path d="M32 48v1"/></svg>`,
+  hands: `<svg viewBox="0 0 64 64" ${S}><path d="M18 56V28a4 4 0 0 1 8 0v12M26 30V18a4 4 0 0 1 8 0v20M34 22a4 4 0 0 1 8 0v18M42 30a4 4 0 0 1 8 0v12c0 8-6 14-14 14H30c-6 0-9-3-12-8l-6-10a4 4 0 0 1 6-4"/><path d="M50 10c2 2 2 4 0 6M56 8c3 4 3 8 0 12"/></svg>`,
+  rail: `<svg viewBox="0 0 64 64" ${S}><path d="M6 50V20M6 44h52v6"/><path d="M14 36V24h36v12M14 30h36M26 24v12M38 24v12"/><path d="M32 18V6M26 12l6-6 6 6"/></svg>`,
+  patient: `<svg viewBox="0 0 64 64" ${S}><path d="M6 50V22M6 42h52v8"/><circle cx="17" cy="32" r="6"/><path d="M26 36h30v-6c0-4-3-6-6-6H30"/></svg>`,
+  caregiver: `<svg viewBox="0 0 64 64" ${S}><circle cx="24" cy="14" r="8"/><path d="M8 58V40c0-10 7-16 16-16s16 6 16 16"/><path d="M38 34l10 6 8-10"/></svg>`,
+  speaker: `<svg viewBox="0 0 64 64" ${S}><path d="M8 24h12l14-12v40L20 40H8z"/><path d="M42 22c4 4 4 16 0 20M48 14c8 8 8 28 0 36"/></svg>`,
+  back: `<svg viewBox="0 0 64 64" ${S}><path d="M40 12L20 32l20 20"/></svg>`,
+  home: `<svg viewBox="0 0 64 64" ${S}><path d="M8 30L32 10l24 20"/><path d="M16 26v28h32V26"/><path d="M27 54V40h10v14"/></svg>`,
+  globe: `<svg viewBox="0 0 64 64" ${S}><circle cx="32" cy="32" r="24"/><path d="M8 32h48M32 8c-10 12-10 36 0 48M32 8c10 12 10 36 0 48"/></svg>`
+};
