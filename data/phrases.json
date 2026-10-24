@@ -1,5 +1,6 @@
 {
-  "version": "0.1.3-test",
+  "version": "0.1.4-test",
+  "copyright": "© 2026 SOCRA × TESS. All rights reserved.",
   "notice": "모든 번역·음성은 시험용입니다. 모국어 화자 검수 전에는 실제 돌봄에 단독으로 사용하지 마세요.",
   "languages": [
     { "code": "zh", "label": "中文", "ko": "중국어", "tts": "zh-CN", "enabled": true },

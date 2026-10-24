@@ -191,7 +191,7 @@
 
   function notice() {
     return `<p class="notice">${esc(DATA.notice)}<br>회원가입·개인정보·대화 기록을 저장하지 않습니다.</p>
-      <p class="sign">© 2026 Socra × Tess · v${esc(DATA.version)}</p>`;
+      <p class="sign">${esc(DATA.copyright || '© 2026 SOCRA × TESS. All rights reserved.')}<br><span class="ver">v${esc(DATA.version)}</span></p>`;
   }
 
   function render() {

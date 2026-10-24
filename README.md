@@ -28,4 +28,4 @@
 ## 음성 우선순위
 1) `audio`에 파일이 있으면 그 파일 재생 → 2) 없으면 기기 TTS(Web Speech API) → 3) 둘 다 안 되면 "화면 글자를 보여 주세요" 안내. 번역 글자는 항상 표시.
 
-© 2026 Socra × Tess
+© 2026 SOCRA × TESS. All rights reserved.
